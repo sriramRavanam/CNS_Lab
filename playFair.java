@@ -1,8 +1,19 @@
 //so far, identified one error - taking characters together
 
+import java.util.*;
 
 class playFair {
 	public static void main(String args[]) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("enter the plain text->");
+		String plainText = sc.nextLine();
+		
+		System.out.println("enter the key->");
+		String key = sc.nextLine();
+		
+		
 		cipher c = new cipher();
 		System.out.println(c.encipher("hello", "cse"));
 	}
@@ -112,4 +123,6 @@ class cipher{
 		return res;
 		
 	}
+	
+	
 }
