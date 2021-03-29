@@ -103,8 +103,9 @@ class cipher{
 				res+= (char)mat[y2][(x2+1)%5];
 			}
 			else {
-				res+= (char)mat[y1][x2];
 				res+= (char)mat[y2][x1];
+				res+= (char)mat[y1][x2];
+				
 			}
 		}
 		
