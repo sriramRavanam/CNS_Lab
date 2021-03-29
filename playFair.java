@@ -65,10 +65,20 @@ class cipher{
 		mat = makeMatrix(key);
 		
 		for(int i=0;i<pt.length();i+=2) {
-			//TODO: taking two letters at a time, if both same letters, apply stuffing, else if the number of letters in plaintext is not a multiple of two, then add letter at end
+			//TODO: if letters in plaintext is not a multiple of two, then add letter at end
 			
 			char c1 = pt.charAt(i);
-			char c2 = pt.charAt(i+1);
+			char c2;
+			if(i == pt.length()-1) {
+				c2 = 'x'; 
+			}
+			else {
+				c2 = pt.charAt(i+1);
+			}
+			if(c1 == c2) {
+				i--;
+				c2='x';
+			}
 			int x1=0,x2=0,y1=0,y2=0;
 			
 			for(int j=0;j<5;j++)
@@ -85,13 +95,16 @@ class cipher{
 				}
 			
 			if(x1 == x2) {
-				res+=mat[(y1+1)%5][x1]+mat[(y2+1)%5][x2];	
+				res+=(char)mat[(y1+1)%5][x1];
+				res+=(char)mat[(y2+1)%5][x2];
 			}
 			else if(y1 == y2) {
-				res+= mat[y1][(x1+1)%5]+mat[y2][(x2+1)%5];
+				res+= (char)mat[y1][(x1+1)%5];
+				res+= (char)mat[y2][(x2+1)%5];
 			}
 			else {
-				res+= mat[y1][x2]+mat[y2][x1];
+				res+= (char)mat[y1][x2];
+				res+= (char)mat[y2][x1];
 			}
 		}
 		
