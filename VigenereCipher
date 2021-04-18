@@ -1,0 +1,61 @@
+import java.util.*;
+public class VigenereCipher {
+
+	public static void main(String[] args) {
+		Cipher cipher = new Cipher();
+		cipher.encipher();
+		System.out.println("Cipher text = ");
+		System.out.println(cipher.cipherText);
+
+	}
+
+}
+
+class Cipher{
+	String cipherText;
+	String plainText;
+	String key;
+	public Cipher() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Key");
+		this.key = sc.nextLine();
+		
+		System.out.println("Enter the PlainText");
+		this.plainText = sc.nextLine();
+		sc.close();
+	}
+	
+	public void encipher() {
+		String res = "";
+		
+		char[][] mat = makeTable();
+		
+		String temp = "";
+		for(int i=0;i<plainText.length();i++) {
+			temp += key.charAt(i%key.length());
+		}
+		
+		for(int i = 0;i<plainText.length();i++) {
+			int r = temp.charAt(i);
+			int c = plainText.charAt(i);
+			r = r-65;
+			c = c-65;
+			res += mat[r][c];
+		}
+		
+		
+		this.cipherText = res;
+	}
+	
+	private char[][] makeTable(){
+		char[][] tab = new char[26][26];
+		
+		for(int i=0;i<26;i++) {
+			for(int j=0;j<26;j++) {
+				tab[i][j] = (char)(((i+j)%26)+65);
+			}
+		}
+		
+		return tab;
+	}
+}
