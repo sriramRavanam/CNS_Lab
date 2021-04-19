@@ -6,6 +6,9 @@ public class VigenereCipher {
 		cipher.encipher();
 		System.out.println("Cipher text = ");
 		System.out.println(cipher.cipherText);
+		cipher.decipher();
+		System.out.println("Plaintext after deciphering = ");
+		System.out.println(cipher.plainText);
 
 	}
 
@@ -45,6 +48,36 @@ class Cipher{
 		
 		
 		this.cipherText = res;
+	}
+	
+	public void decipher() {
+		String res = "";
+		int i,r,c,j;
+		
+		char[][] mat = makeTable();
+		
+		String temp = "";
+		
+		for(i=0;i<cipherText.length();i++) {
+			temp += key.charAt(i%key.length());
+		}
+		
+		
+		for(i =0;i<cipherText.length();i++) {
+			r = temp.charAt(i);
+			c = cipherText.charAt(i);
+			r = r-65;
+			j=0;
+			for(j =0;j<26;j++) {
+				if(mat[j][r] == c) {
+					break;
+				}
+			}
+			res += (char)(j+65);
+		}
+		
+		this.plainText = res;
+		
 	}
 	
 	private char[][] makeTable(){
